@@ -2,6 +2,10 @@
 -- Миграция 0002 — RPC-функции для тяжёлых агрегатов
 -- Вся агрегация выполняется в БД (date_trunc / group by), на клиент уходят
 -- только сжатые результаты.
+--
+-- У всех функций зафиксирован `search_path = ''` (рекомендация линтера Supabase):
+-- таблицы адресуются по полному имени (public.*), а встроенные функции
+-- (date_trunc, sum, count, ...) доступны через pg_catalog.
 -- ============================================================================
 
 -- ----------------------------------------------------------------------------
@@ -22,6 +26,7 @@ returns table (
 )
 language sql
 stable
+set search_path = ''
 as $$
   select
     date_trunc(
@@ -60,6 +65,7 @@ returns table (
 )
 language sql
 stable
+set search_path = ''
 as $$
   with ranked as (
     select
@@ -108,6 +114,7 @@ returns table (
 )
 language sql
 stable
+set search_path = ''
 as $$
   select
     o.channel,
@@ -139,6 +146,7 @@ create or replace function public.period_comparison(
 returns json
 language sql
 stable
+set search_path = ''
 as $$
   with bounds as (
     select
