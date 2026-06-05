@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #f7f5f0;
+  --surface: #ffffff;
+  --ink: #1b1a16;
+  --muted: #6e6a5f;
+  --line: #e7e2d6;
+  --accent: #1f3a5f;
+  --positive: #2f8f5b;
+  --negative: #c6453d;
+}
+
+@layer base {
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    /* Мягкий тёплый фон вместо «шума». */
+    background-image:
+      radial-gradient(60rem 60rem at 12% -10%, rgba(31, 58, 95, 0.05), transparent 55%),
+      radial-gradient(50rem 50rem at 105% 0%, rgba(192, 138, 46, 0.06), transparent 50%);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Единый вид нативных контролов. */
+  select,
+  input[type='date'] {
+    color: var(--ink);
+  }
+
+  ::selection {
+    background: rgba(31, 58, 95, 0.15);
+  }
+}
+
+@layer components {
+  .panel {
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.875rem;
+    box-shadow: 0 1px 2px rgba(27, 26, 22, 0.03);
+  }
+
+  .input {
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.625rem;
+    font-size: 0.875rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(31, 58, 95, 0.12);
+  }
+
+  .btn-accent {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent);
+    color: #fff;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: opacity 0.15s;
+  }
+  .btn-accent:hover {
+    opacity: 0.9;
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 0.15s;
+  }
+  .btn-outline:hover {
+    background-color: var(--paper);
+  }
+}
+
+@layer utilities {
+  .tnum {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+}
